@@ -1,0 +1,187 @@
+﻿* {
+    /* 
+    Defines the main font used throughout the entire site.
+  */
+    font-family: Verdana, Arial, Sans-Serif;
+}
+
+body {
+    /* 
+    Clears white space around the body and sets the background color to a dark grey.
+  */
+    background-image: url('Images/6.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+a {
+    /*
+    Clears the underline on normal links, and gives them #FE601A (orange) as the text color.
+  */
+    color: #FE601A;
+    text-decoration: none;
+}
+
+    a:hover {
+        /*
+    Underlines links when the user hovers the mouse over them.
+  */
+        text-decoration: underline;
+    }
+
+h1 {
+    /*
+    Makes h1 elements smaller than their browser default.
+  */
+    font-size: 20px;
+}
+
+header {
+   
+    background-repeat: no-repeat;
+}
+
+    header a {
+        /*
+    The header a is nested in the header. It provides a link to the homepage,
+    and sets the header image background.
+  */    background-image: url(Images/anh7.jpg);
+        background-color: #e39125;
+        background-repeat: no-repeat;
+        width: 845px;
+        height: 138px;
+    }
+
+nav {
+    /*
+    Floats the entire menu on the left of the content.
+  */
+    background-image: none;
+    width: 130px;
+    margin: auto;
+    float: left;
+    padding: 10px;
+    padding-top: 0; /* Reset the top-padding. The first menu item (home) already adds some padding to its top to create room between the nav element and the first menu item */
+    margin-left: 35px;
+    margin-right: 20px;
+    font-size: 0.8em;
+}
+
+.FirstLevelMenuItems {
+    padding-top: 10px;
+}
+
+section#MainContent {
+    /*
+    Defines the main content area. The text color is white (on the gray background set on the body).
+    The #MainContent section element has a minimum height of 370 pixels, but can grow if necessary.
+    The font-size is 80% of its parent element, which in this case comes down to 80% of the font
+    the user has specified as the default font in the browser.
+  */
+    color: black;
+    font-size: 0.8em;
+    width: 615px;
+    min-height: 370px;
+    padding: 10px;
+    float: left;
+}
+
+aside#Sidebar {
+    /*
+    The Sidebar is positioned absolutely at the right of the page.
+    It has the same font-size and color as #MainContent
+  */
+    
+    font-size: 0.8em;
+    width: 168px;
+    color: White;
+    float: left;
+    padding-top: 10px;
+    display: block;
+    margin-top: -646%;
+}
+
+footer {
+    /*
+    The footer is positioned below all other content.
+    At the top, it gets a border with a dashed style, while all other sides have no border.
+	  The line-height centers the text in the footer vertically.
+  */
+    text-align: center;
+    border-top: 2px dashed gray;
+    height: 37px;
+    line-height: 37px;
+    clear: both;
+    background-color: #FCBB5B;
+}
+
+.Introduction {
+    font-style: italic;
+}
+
+img {
+    border: 0;
+}
+
+.ErrorMessage {
+    color: violet;
+}
+
+.AJAX {
+    height: 50px;
+    width: 500px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    line-height: 32px;
+}
+
+.Attention {
+    border: 4px solid red;
+    padding: 10px 0;
+    width: 100px;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+
+.ItemContainer {
+    width: 400px;
+    list-style-type: none;
+    clear: both;
+}
+
+    .ItemContainer li {
+        height: 300px;
+        width: 200px;
+        float: left;
+    }
+
+        .ItemContainer li img {
+            width: 180px;
+            margin: 10px 20px 10px
+        }
+
+#TreeView2 {
+    background: #f7f7f7;
+    color: black;
+    width: 100%;
+    height: auto;
+    padding: 2%;
+    display: block
+}
+
+    #TreeView2 a {
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+        padding-bottom: 10%;
+        padding-right: 10%;
+    }
+
+        #TreeView2 a:hover {
+            color: #f7f7f7;
+            font-weight: bold;
+            background: #000000;
+            padding-bottom: 10%;
+            padding-right: 10%;
+        }

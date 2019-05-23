@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ngocminhtranModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ngocminhtranModelStoreContainer">
+          <EntitySet Name="Genre" EntityType="ngocminhtranModel.Store.Genre" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PhotoAlbum" EntityType="ngocminhtranModel.Store.PhotoAlbum" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Picture" EntityType="ngocminhtranModel.Store.Picture" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Review" EntityType="ngocminhtranModel.Store.Review" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Picture_PhotoAlbum" Association="ngocminhtranModel.Store.FK_Picture_PhotoAlbum">
+            <End Role="PhotoAlbum" EntitySet="PhotoAlbum" />
+            <End Role="Picture" EntitySet="Picture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Genre" Association="ngocminhtranModel.Store.FK_Review_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="ToolTip" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="PhotoAlbumId" Type="int" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Summary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GenreId" Type="int" Nullable="false" />
+          <Property Name="Authorized" Type="bit" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" />
+          <Property Name="UpdateDateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Picture_PhotoAlbum">
+          <End Role="PhotoAlbum" Type="ngocminhtranModel.Store.PhotoAlbum" Multiplicity="0..1" />
+          <End Role="Picture" Type="ngocminhtranModel.Store.Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoAlbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="PhotoAlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Genre">
+          <End Role="Genre" Type="ngocminhtranModel.Store.Genre" Multiplicity="1" />
+          <End Role="Review" Type="ngocminhtranModel.Store.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ngocminhtranModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ngocminhtranEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Genres" EntityType="ngocminhtranModel.Genre" />
+          <EntitySet Name="Reviews" EntityType="ngocminhtranModel.Review" />
+          <AssociationSet Name="FK_Review_Genre" Association="ngocminhtranModel.FK_Review_Genre">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <EntitySet Name="PhotoAlbums" EntityType="ngocminhtranModel.PhotoAlbum" />
+          <EntitySet Name="Pictures" EntityType="ngocminhtranModel.Picture" />
+          <AssociationSet Name="FK_Picture_PhotoAlbum" Association="ngocminhtranModel.FK_Picture_PhotoAlbum">
+            <End Role="PhotoAlbum" EntitySet="PhotoAlbums" />
+            <End Role="Picture" EntitySet="Pictures" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reviews" Relationship="ngocminhtranModel.FK_Review_Genre" FromRole="Genre" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Summary" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GenreId" Type="Int32" Nullable="false" />
+          <Property Name="Authorized" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Genre" Relationship="ngocminhtranModel.FK_Review_Genre" FromRole="Review" ToRole="Genre" />
+        </EntityType>
+        <Association Name="FK_Review_Genre">
+          <End Role="Genre" Type="ngocminhtranModel.Genre" Multiplicity="1" />
+          <End Role="Review" Type="ngocminhtranModel.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PhotoAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pictures" Relationship="ngocminhtranModel.FK_Picture_PhotoAlbum" FromRole="PhotoAlbum" ToRole="Picture" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ToolTip" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageUrl" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PhotoAlbumId" />
+          <NavigationProperty Name="PhotoAlbum" Relationship="ngocminhtranModel.FK_Picture_PhotoAlbum" FromRole="Picture" ToRole="PhotoAlbum" />
+        </EntityType>
+        <Association Name="FK_Picture_PhotoAlbum">
+          <End Type="ngocminhtranModel.PhotoAlbum" Role="PhotoAlbum" Multiplicity="0..1" />
+          <End Type="ngocminhtranModel.Picture" Role="Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoAlbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="PhotoAlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ngocminhtranModelStoreContainer" CdmEntityContainer="ngocminhtranEntities">
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="ngocminhtranModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="ngocminhtranModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+                <ScalarProperty Name="Authorized" ColumnName="Authorized" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoAlbums">
+            <EntityTypeMapping TypeName="ngocminhtranModel.PhotoAlbum">
+              <MappingFragment StoreEntitySet="PhotoAlbum">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="ngocminhtranModel.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="PhotoAlbumId" ColumnName="PhotoAlbumId" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="ToolTip" ColumnName="ToolTip" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
